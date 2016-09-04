@@ -1,4 +1,4 @@
-# SimpleSMTPClient
+# Simple SMTP Email Client
 Simple to the point quick SMTP Test Client.  
 Download the Release [Here](https://github.com/CodeCowboyOrg/SimpleSMTPClient/releases) or under Release Tab
 
