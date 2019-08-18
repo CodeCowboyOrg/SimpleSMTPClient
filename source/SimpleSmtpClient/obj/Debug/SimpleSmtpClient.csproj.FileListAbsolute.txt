@@ -1,8 +1,0 @@
-c:\users\johnny\documents\visual studio 2015\Projects\SimpleSmtpClient\SimpleSmtpClient\bin\Debug\SimpleSmtpClient.exe
-c:\users\johnny\documents\visual studio 2015\Projects\SimpleSmtpClient\SimpleSmtpClient\bin\Debug\SimpleSmtpClient.pdb
-c:\users\johnny\documents\visual studio 2015\Projects\SimpleSmtpClient\SimpleSmtpClient\obj\Debug\SimpleSmtpClient.mainForm.resources
-c:\users\johnny\documents\visual studio 2015\Projects\SimpleSmtpClient\SimpleSmtpClient\obj\Debug\SimpleSmtpClient.Properties.Resources.resources
-c:\users\johnny\documents\visual studio 2015\Projects\SimpleSmtpClient\SimpleSmtpClient\obj\Debug\SimpleSmtpClient.csproj.GenerateResource.Cache
-c:\users\johnny\documents\visual studio 2015\Projects\SimpleSmtpClient\SimpleSmtpClient\obj\Debug\SimpleSmtpClient.exe
-c:\users\johnny\documents\visual studio 2015\Projects\SimpleSmtpClient\SimpleSmtpClient\obj\Debug\SimpleSmtpClient.pdb
-c:\users\johnny\documents\visual studio 2015\Projects\SimpleSmtpClient\SimpleSmtpClient\bin\Debug\SimpleSmtpClient.exe.config

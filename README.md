@@ -1,11 +1,11 @@
-# Simple SMTP Email Client
-Simple to the point quick SMTP Test Client.  
+# Simple SMTP Client
 
-1. Download the Release [Here](https://github.com/CodeCowboyOrg/SimpleSMTPClient/releases) or under Release Tab
-2. Supports Basic Authentication to SMTP Server
-3. Supports anonymous connection to SMTP Server
-4. Runs on Windows
+## A simple and to the point SMTP test client
 
+1. Download the release under the "release" tab.
+2. Supports Basic Authentication to SMTP server.
+3. Supports Anonymous connection to SMTP Server.
+4. Supports SSL connection to SMTP server.
+5. Runs on Windows.
 
-![Image of Software](https://github.com/CodeCowboyOrg/SimpleSMTPClient/blob/master/source/SimpleSmtpClient/SimpleSMTPClient.jpg)
-
+![Image of Software](https://i.imgur.com/Z7NCEcm.png)
