@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             this.serverGroup = new System.Windows.Forms.GroupBox();
+            this.guiUseSsl = new System.Windows.Forms.CheckBox();
             this.guiPassword = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
             this.guiUser = new System.Windows.Forms.TextBox();
@@ -49,13 +50,16 @@
             this.guiEmailFrom = new System.Windows.Forms.TextBox();
             this.lblEmailFrom = new System.Windows.Forms.Label();
             this.guiSendMail = new System.Windows.Forms.Button();
-            this.guiUseSsl = new System.Windows.Forms.CheckBox();
+            this.cmbSSLVersion = new System.Windows.Forms.ComboBox();
+            this.lblSSLVersion = new System.Windows.Forms.Label();
             this.serverGroup.SuspendLayout();
             this.emailGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // serverGroup
             // 
+            this.serverGroup.Controls.Add(this.lblSSLVersion);
+            this.serverGroup.Controls.Add(this.cmbSSLVersion);
             this.serverGroup.Controls.Add(this.guiUseSsl);
             this.serverGroup.Controls.Add(this.guiPassword);
             this.serverGroup.Controls.Add(this.lblPassword);
@@ -73,13 +77,23 @@
             this.serverGroup.TabStop = false;
             this.serverGroup.Text = "SMTP Configuration";
             // 
+            // guiUseSsl
+            // 
+            this.guiUseSsl.AutoSize = true;
+            this.guiUseSsl.Location = new System.Drawing.Point(25, 97);
+            this.guiUseSsl.Name = "guiUseSsl";
+            this.guiUseSsl.Size = new System.Drawing.Size(68, 17);
+            this.guiUseSsl.TabIndex = 6;
+            this.guiUseSsl.Text = "Use SSL";
+            this.guiUseSsl.UseVisualStyleBackColor = true;
+            // 
             // guiPassword
             // 
             this.guiPassword.Location = new System.Drawing.Point(434, 66);
             this.guiPassword.Name = "guiPassword";
             this.guiPassword.ReadOnly = true;
             this.guiPassword.Size = new System.Drawing.Size(87, 20);
-            this.guiPassword.TabIndex = 8;
+            this.guiPassword.TabIndex = 5;
             // 
             // lblPassword
             // 
@@ -96,7 +110,7 @@
             this.guiUser.Name = "guiUser";
             this.guiUser.ReadOnly = true;
             this.guiUser.Size = new System.Drawing.Size(154, 20);
-            this.guiUser.TabIndex = 6;
+            this.guiUser.TabIndex = 4;
             // 
             // lblUserName
             // 
@@ -113,7 +127,7 @@
             this.guiUseCredentials.Location = new System.Drawing.Point(25, 69);
             this.guiUseCredentials.Name = "guiUseCredentials";
             this.guiUseCredentials.Size = new System.Drawing.Size(116, 17);
-            this.guiUseCredentials.TabIndex = 4;
+            this.guiUseCredentials.TabIndex = 3;
             this.guiUseCredentials.Text = "Use Authentication";
             this.guiUseCredentials.UseVisualStyleBackColor = true;
             this.guiUseCredentials.CheckedChanged += new System.EventHandler(this.guiUseCredentials_CheckedChanged);
@@ -123,7 +137,7 @@
             this.guiPort.Location = new System.Drawing.Point(449, 28);
             this.guiPort.Name = "guiPort";
             this.guiPort.Size = new System.Drawing.Size(73, 20);
-            this.guiPort.TabIndex = 3;
+            this.guiPort.TabIndex = 2;
             // 
             // lblPort
             // 
@@ -173,7 +187,7 @@
             this.guiEmailBody.Multiline = true;
             this.guiEmailBody.Name = "guiEmailBody";
             this.guiEmailBody.Size = new System.Drawing.Size(446, 77);
-            this.guiEmailBody.TabIndex = 8;
+            this.guiEmailBody.TabIndex = 11;
             // 
             // lblBody
             // 
@@ -189,7 +203,7 @@
             this.guiEmailSubject.Location = new System.Drawing.Point(76, 104);
             this.guiEmailSubject.Name = "guiEmailSubject";
             this.guiEmailSubject.Size = new System.Drawing.Size(446, 20);
-            this.guiEmailSubject.TabIndex = 6;
+            this.guiEmailSubject.TabIndex = 10;
             // 
             // lblSubject
             // 
@@ -205,7 +219,7 @@
             this.guiEmailTo.Location = new System.Drawing.Point(76, 66);
             this.guiEmailTo.Name = "guiEmailTo";
             this.guiEmailTo.Size = new System.Drawing.Size(446, 20);
-            this.guiEmailTo.TabIndex = 4;
+            this.guiEmailTo.TabIndex = 9;
             // 
             // lblEmailTo
             // 
@@ -221,7 +235,7 @@
             this.guiEmailFrom.Location = new System.Drawing.Point(76, 28);
             this.guiEmailFrom.Name = "guiEmailFrom";
             this.guiEmailFrom.Size = new System.Drawing.Size(446, 20);
-            this.guiEmailFrom.TabIndex = 2;
+            this.guiEmailFrom.TabIndex = 8;
             // 
             // lblEmailFrom
             // 
@@ -237,20 +251,33 @@
             this.guiSendMail.Location = new System.Drawing.Point(446, 427);
             this.guiSendMail.Name = "guiSendMail";
             this.guiSendMail.Size = new System.Drawing.Size(104, 31);
-            this.guiSendMail.TabIndex = 2;
+            this.guiSendMail.TabIndex = 12;
             this.guiSendMail.Text = "Send Mail";
             this.guiSendMail.UseVisualStyleBackColor = true;
             this.guiSendMail.Click += new System.EventHandler(this.guiSendMail_Click);
             // 
-            // guiUseSsl
+            // cmbSSLVersion
             // 
-            this.guiUseSsl.AutoSize = true;
-            this.guiUseSsl.Location = new System.Drawing.Point(25, 97);
-            this.guiUseSsl.Name = "guiUseSsl";
-            this.guiUseSsl.Size = new System.Drawing.Size(68, 17);
-            this.guiUseSsl.TabIndex = 9;
-            this.guiUseSsl.Text = "Use SSL";
-            this.guiUseSsl.UseVisualStyleBackColor = true;
+            this.cmbSSLVersion.FormattingEnabled = true;
+            this.cmbSSLVersion.Items.AddRange(new object[] {
+            "Auto",
+            "SSL3",
+            "TLS 1.0",
+            "TLS 1.1",
+            "TLS 1.2"});
+            this.cmbSSLVersion.Location = new System.Drawing.Point(400, 95);
+            this.cmbSSLVersion.Name = "cmbSSLVersion";
+            this.cmbSSLVersion.Size = new System.Drawing.Size(121, 21);
+            this.cmbSSLVersion.TabIndex = 7;
+            // 
+            // lblSSLVersion
+            // 
+            this.lblSSLVersion.AutoSize = true;
+            this.lblSSLVersion.Location = new System.Drawing.Point(298, 98);
+            this.lblSSLVersion.Name = "lblSSLVersion";
+            this.lblSSLVersion.Size = new System.Drawing.Size(96, 13);
+            this.lblSSLVersion.TabIndex = 10;
+            this.lblSSLVersion.Text = "SSL / TLS Version";
             // 
             // mainForm
             // 
@@ -296,6 +323,8 @@
         private System.Windows.Forms.Label lblEmailFrom;
         private System.Windows.Forms.Button guiSendMail;
         private System.Windows.Forms.CheckBox guiUseSsl;
+        private System.Windows.Forms.Label lblSSLVersion;
+        private System.Windows.Forms.ComboBox cmbSSLVersion;
     }
 }
 

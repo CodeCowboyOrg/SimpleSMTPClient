@@ -44,6 +44,29 @@ namespace SimpleSmtpClient
                 if (guiUseSsl.Checked)
                 {
                     client.EnableSsl = true;
+
+                    int sslVer = cmbSSLVersion.SelectedIndex;
+                    if (sslVer == 0 || sslVer == -1)
+                    {
+                        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault;
+                    }
+                    else if (sslVer == 1)
+                    {
+                        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+                    }
+                    else if (sslVer == 2)
+                    {
+                        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+                    }
+                    else if (sslVer == 3)
+                    {
+                        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11;
+                    }
+                    else if (sslVer == 4)
+                    {
+                        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    }
+                    //tls 1.3 not supported by .net framework 4.8 as of now.
                 }
                 MailMessage message = CreateMailMessage();
                 client.Send(message);
