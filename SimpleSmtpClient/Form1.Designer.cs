@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             this.serverGroup = new System.Windows.Forms.GroupBox();
+            this.lblSSLVersion = new System.Windows.Forms.Label();
+            this.cmbSSLVersion = new System.Windows.Forms.ComboBox();
             this.guiUseSsl = new System.Windows.Forms.CheckBox();
             this.guiPassword = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
@@ -50,8 +52,11 @@
             this.guiEmailFrom = new System.Windows.Forms.TextBox();
             this.lblEmailFrom = new System.Windows.Forms.Label();
             this.guiSendMail = new System.Windows.Forms.Button();
-            this.cmbSSLVersion = new System.Windows.Forms.ComboBox();
-            this.lblSSLVersion = new System.Windows.Forms.Label();
+            this.guiReplyTo = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.guiHeader = new System.Windows.Forms.TextBox();
+            this.guiHeaderValue = new System.Windows.Forms.TextBox();
             this.serverGroup.SuspendLayout();
             this.emailGroup.SuspendLayout();
             this.SuspendLayout();
@@ -76,6 +81,29 @@
             this.serverGroup.TabIndex = 0;
             this.serverGroup.TabStop = false;
             this.serverGroup.Text = "SMTP Configuration";
+            // 
+            // lblSSLVersion
+            // 
+            this.lblSSLVersion.AutoSize = true;
+            this.lblSSLVersion.Location = new System.Drawing.Point(298, 98);
+            this.lblSSLVersion.Name = "lblSSLVersion";
+            this.lblSSLVersion.Size = new System.Drawing.Size(96, 13);
+            this.lblSSLVersion.TabIndex = 10;
+            this.lblSSLVersion.Text = "SSL / TLS Version";
+            // 
+            // cmbSSLVersion
+            // 
+            this.cmbSSLVersion.FormattingEnabled = true;
+            this.cmbSSLVersion.Items.AddRange(new object[] {
+            "Auto",
+            "SSL3",
+            "TLS 1.0",
+            "TLS 1.1",
+            "TLS 1.2"});
+            this.cmbSSLVersion.Location = new System.Drawing.Point(400, 95);
+            this.cmbSSLVersion.Name = "cmbSSLVersion";
+            this.cmbSSLVersion.Size = new System.Drawing.Size(121, 21);
+            this.cmbSSLVersion.TabIndex = 7;
             // 
             // guiUseSsl
             // 
@@ -166,6 +194,11 @@
             // 
             // emailGroup
             // 
+            this.emailGroup.Controls.Add(this.guiHeaderValue);
+            this.emailGroup.Controls.Add(this.guiHeader);
+            this.emailGroup.Controls.Add(this.label2);
+            this.emailGroup.Controls.Add(this.guiReplyTo);
+            this.emailGroup.Controls.Add(this.label1);
             this.emailGroup.Controls.Add(this.guiEmailBody);
             this.emailGroup.Controls.Add(this.lblBody);
             this.emailGroup.Controls.Add(this.guiEmailSubject);
@@ -176,14 +209,14 @@
             this.emailGroup.Controls.Add(this.lblEmailFrom);
             this.emailGroup.Location = new System.Drawing.Point(12, 170);
             this.emailGroup.Name = "emailGroup";
-            this.emailGroup.Size = new System.Drawing.Size(539, 242);
+            this.emailGroup.Size = new System.Drawing.Size(539, 345);
             this.emailGroup.TabIndex = 1;
             this.emailGroup.TabStop = false;
             this.emailGroup.Text = "Email Message";
             // 
             // guiEmailBody
             // 
-            this.guiEmailBody.Location = new System.Drawing.Point(76, 142);
+            this.guiEmailBody.Location = new System.Drawing.Point(76, 181);
             this.guiEmailBody.Multiline = true;
             this.guiEmailBody.Name = "guiEmailBody";
             this.guiEmailBody.Size = new System.Drawing.Size(446, 77);
@@ -192,7 +225,7 @@
             // lblBody
             // 
             this.lblBody.AutoSize = true;
-            this.lblBody.Location = new System.Drawing.Point(22, 143);
+            this.lblBody.Location = new System.Drawing.Point(22, 182);
             this.lblBody.Name = "lblBody";
             this.lblBody.Size = new System.Drawing.Size(31, 13);
             this.lblBody.TabIndex = 7;
@@ -200,7 +233,7 @@
             // 
             // guiEmailSubject
             // 
-            this.guiEmailSubject.Location = new System.Drawing.Point(76, 104);
+            this.guiEmailSubject.Location = new System.Drawing.Point(76, 143);
             this.guiEmailSubject.Name = "guiEmailSubject";
             this.guiEmailSubject.Size = new System.Drawing.Size(446, 20);
             this.guiEmailSubject.TabIndex = 10;
@@ -208,7 +241,7 @@
             // lblSubject
             // 
             this.lblSubject.AutoSize = true;
-            this.lblSubject.Location = new System.Drawing.Point(22, 107);
+            this.lblSubject.Location = new System.Drawing.Point(22, 146);
             this.lblSubject.Name = "lblSubject";
             this.lblSubject.Size = new System.Drawing.Size(43, 13);
             this.lblSubject.TabIndex = 5;
@@ -248,7 +281,7 @@
             // 
             // guiSendMail
             // 
-            this.guiSendMail.Location = new System.Drawing.Point(446, 427);
+            this.guiSendMail.Location = new System.Drawing.Point(446, 535);
             this.guiSendMail.Name = "guiSendMail";
             this.guiSendMail.Size = new System.Drawing.Size(104, 31);
             this.guiSendMail.TabIndex = 12;
@@ -256,34 +289,50 @@
             this.guiSendMail.UseVisualStyleBackColor = true;
             this.guiSendMail.Click += new System.EventHandler(this.guiSendMail_Click);
             // 
-            // cmbSSLVersion
+            // guiReplyTo
             // 
-            this.cmbSSLVersion.FormattingEnabled = true;
-            this.cmbSSLVersion.Items.AddRange(new object[] {
-            "Auto",
-            "SSL3",
-            "TLS 1.0",
-            "TLS 1.1",
-            "TLS 1.2"});
-            this.cmbSSLVersion.Location = new System.Drawing.Point(400, 95);
-            this.cmbSSLVersion.Name = "cmbSSLVersion";
-            this.cmbSSLVersion.Size = new System.Drawing.Size(121, 21);
-            this.cmbSSLVersion.TabIndex = 7;
+            this.guiReplyTo.Location = new System.Drawing.Point(76, 106);
+            this.guiReplyTo.Name = "guiReplyTo";
+            this.guiReplyTo.Size = new System.Drawing.Size(446, 20);
+            this.guiReplyTo.TabIndex = 13;
             // 
-            // lblSSLVersion
+            // label1
             // 
-            this.lblSSLVersion.AutoSize = true;
-            this.lblSSLVersion.Location = new System.Drawing.Point(298, 98);
-            this.lblSSLVersion.Name = "lblSSLVersion";
-            this.lblSSLVersion.Size = new System.Drawing.Size(96, 13);
-            this.lblSSLVersion.TabIndex = 10;
-            this.lblSSLVersion.Text = "SSL / TLS Version";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(22, 109);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Reply-To";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(22, 281);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(89, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Optional Headers";
+            // 
+            // guiHeader
+            // 
+            this.guiHeader.Location = new System.Drawing.Point(76, 307);
+            this.guiHeader.Name = "guiHeader";
+            this.guiHeader.Size = new System.Drawing.Size(206, 20);
+            this.guiHeader.TabIndex = 15;
+            // 
+            // guiHeaderValue
+            // 
+            this.guiHeaderValue.Location = new System.Drawing.Point(288, 307);
+            this.guiHeaderValue.Name = "guiHeaderValue";
+            this.guiHeaderValue.Size = new System.Drawing.Size(233, 20);
+            this.guiHeaderValue.TabIndex = 16;
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 470);
+            this.ClientSize = new System.Drawing.Size(565, 609);
             this.Controls.Add(this.guiSendMail);
             this.Controls.Add(this.emailGroup);
             this.Controls.Add(this.serverGroup);
@@ -325,6 +374,11 @@
         private System.Windows.Forms.CheckBox guiUseSsl;
         private System.Windows.Forms.Label lblSSLVersion;
         private System.Windows.Forms.ComboBox cmbSSLVersion;
+        private System.Windows.Forms.TextBox guiReplyTo;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox guiHeaderValue;
+        private System.Windows.Forms.TextBox guiHeader;
+        private System.Windows.Forms.Label label2;
     }
 }
 

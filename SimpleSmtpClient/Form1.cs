@@ -86,6 +86,14 @@ namespace SimpleSmtpClient
             mailMessage.To.Add(guiEmailTo.Text);
             mailMessage.Body = guiEmailBody.Text;
             mailMessage.Subject = guiEmailSubject.Text;
+            if (!string.IsNullOrEmpty(guiReplyTo.Text))
+            {
+                mailMessage.ReplyToList.Add(guiReplyTo.Text);
+            }
+            if (!string.IsNullOrEmpty(guiHeader.Text))
+            {
+                mailMessage.Headers.Add(guiHeader.Text, guiHeaderValue.Text);
+            }
             return mailMessage;
         }
     }
