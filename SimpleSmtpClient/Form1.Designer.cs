@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             this.serverGroup = new System.Windows.Forms.GroupBox();
+
             this.guiUseSsl = new System.Windows.Forms.CheckBox();
             this.guiPassword = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
@@ -257,14 +258,15 @@
             this.guiSendMail.Click += new System.EventHandler(this.guiSendMail_Click);
             // 
             // cmbSSLVersion
-            // 
+            //   
+         
             this.cmbSSLVersion.FormattingEnabled = true;
             this.cmbSSLVersion.Items.AddRange(new object[] {
+			"None",
             "Auto",
-            "SSL3",
-            "TLS 1.0",
-            "TLS 1.1",
-            "TLS 1.2"});
+            "SslOnConnect",
+            "StartTls",
+            "StartTlsWhenAvailable"});
             this.cmbSSLVersion.Location = new System.Drawing.Point(400, 95);
             this.cmbSSLVersion.Name = "cmbSSLVersion";
             this.cmbSSLVersion.Size = new System.Drawing.Size(121, 21);

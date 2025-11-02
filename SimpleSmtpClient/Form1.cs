@@ -1,4 +1,9 @@
-﻿using System;
+﻿//nuget install MailKit MimeKit
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
+using Org.BouncyCastle.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,8 +11,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Net.Mail;
-using System.Net;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SimpleSmtpClient
 {
@@ -33,44 +37,44 @@ namespace SimpleSmtpClient
         {
             try
             {
-                SmtpClient client = new SmtpClient();
-                client.Host = guiServerName.Text;
-                client.Port = Convert.ToInt32(guiPort.Text);
-                if (guiUseCredentials.Checked)
-                {
-                    client.UseDefaultCredentials = false;
-                    client.Credentials = new NetworkCredential(guiUser.Text, guiPassword.Text);
-                }
-                if (guiUseSsl.Checked)
-                {
-                    client.EnableSsl = true;
+                var client = new SmtpClient();
+                int sslVer = cmbSSLVersion.SelectedIndex;
 
-                    int sslVer = cmbSSLVersion.SelectedIndex;
-                    if (sslVer == 0 || sslVer == -1)
-                    {
-                        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault;
-                    }
-                    else if (sslVer == 1)
-                    {
-                        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
-                    }
-                    else if (sslVer == 2)
-                    {
-                        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
-                    }
-                    else if (sslVer == 3)
-                    {
-                        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11;
-                    }
-                    else if (sslVer == 4)
-                    {
-                        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                    }
-                    //tls 1.3 not supported by .net framework 4.8 as of now.
+                //The SMTP Port used for connecting.Typical SMTP ports are:
+
+                //25
+                //587(STARTTLS)
+                //465(SSL)
+                SecureSocketOptions SocketOptions = SecureSocketOptions.None; // Initialize with a default value
+                if (sslVer == 0)
+                {
+                    SocketOptions = SecureSocketOptions.None;
                 }
-                MailMessage message = CreateMailMessage();
+                else if (sslVer == 1 || sslVer == -1)
+                {
+                    SocketOptions = SecureSocketOptions.Auto;
+                }
+                else if (sslVer == 2)
+                {
+                    SocketOptions = SecureSocketOptions.SslOnConnect;
+                }
+                else if (sslVer == 3)
+                {
+                    SocketOptions = SecureSocketOptions.StartTls;
+                }
+                else if (sslVer == 4)
+                {
+                    SocketOptions = SecureSocketOptions.StartTlsWhenAvailable;
+                }
+
+                client.Connect(guiServerName.Text, Convert.ToInt32(guiPort.Text), SocketOptions);
+                client.Authenticate(guiUser.Text, guiPassword.Text);
+
+                MimeMessage message = CreateMailMessage();
                 client.Send(message);
-                MessageBox.Show("Email Sent.");
+                client.Disconnect(true);
+
+                MessageBox.Show("Email sent successfully!");
 
             }
             catch (Exception ex)
@@ -79,14 +83,16 @@ namespace SimpleSmtpClient
             }
         }
 
-        private MailMessage CreateMailMessage()
+        private MimeMessage CreateMailMessage()
         {
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress(guiEmailFrom.Text);
-            mailMessage.To.Add(guiEmailTo.Text);
-            mailMessage.Body = guiEmailBody.Text;
-            mailMessage.Subject = guiEmailSubject.Text;
-            return mailMessage;
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Your Name", guiEmailFrom.Text));
+            message.To.Add(new MailboxAddress("Recipient", guiEmailTo.Text));
+            message.Subject = guiEmailSubject.Text;
+            message.Body = new TextPart("plain") { Text = guiEmailBody.Text };
+
+
+            return message;
         }
     }
 }

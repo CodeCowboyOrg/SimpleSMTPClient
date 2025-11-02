@@ -1,3 +1,4 @@
+## The Net.Mail with SSL not working with modern SMTP Server, So replace System.Net.Mail with MailKit/MimeKit for supporting SSL / TLS smtp
 # Simple SMTP Client
 
 ## A simple and to the point SMTP test client
