@@ -283,22 +283,35 @@ public partial class MainForm : Form
             return false;
         }
 
-        if (string.IsNullOrWhiteSpace(guiEmailTo.Text))
+        var toAddresses = SplitEmailAddresses(guiEmailTo.Text);
+
+        if (toAddresses.Count == 0)
         {
             ShowValidationError("Please enter a recipient email address.", guiEmailTo);
             return false;
         }
 
-        if (!IsValidEmail(guiEmailTo.Text.Trim()))
+        foreach (var address in toAddresses)
         {
-            ShowValidationError("Please enter a valid recipient email address.", guiEmailTo);
-            return false;
+            if (!IsValidEmail(address))
+            {
+                ShowValidationError($"Please enter a valid recipient email address: {address}", guiEmailTo);
+                return false;
+            }
         }
 
         return true;
     }
 
     private static bool IsValidEmail(string email) => EmailValidationRegex().IsMatch(email);
+
+    private static List<string> SplitEmailAddresses(string input)
+    {
+        return input
+            .Split(new[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Where(s => !string.IsNullOrWhiteSpace(s))
+            .ToList();
+    }
 
     private void ShowValidationError(string message, Control control)
     {
@@ -311,7 +324,12 @@ public partial class MainForm : Form
     {
         var message = new MimeMessage();
         message.From.Add(new MailboxAddress(string.Empty, guiEmailFrom.Text.Trim()));
-        message.To.Add(new MailboxAddress(string.Empty, guiEmailTo.Text.Trim()));
+
+        foreach (var address in SplitEmailAddresses(guiEmailTo.Text))
+        {
+            message.To.Add(new MailboxAddress(string.Empty, address));
+        }
+
         message.Subject = guiEmailSubject.Text;
         message.Body = new TextPart("plain")
         {
