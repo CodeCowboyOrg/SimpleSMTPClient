@@ -14,6 +14,7 @@
     <Copyright>Copyright © 2025</Copyright>
     <Product>Simple SMTP Client</Product>
     <Description>Simple SMTP Windows Client for Testing SMTP Server</Description>
+    <ApplicationIcon>SimpleSMTPClient.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
