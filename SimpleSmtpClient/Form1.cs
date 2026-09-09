@@ -58,6 +58,7 @@ public partial class MainForm : Form
             : 0;
         guiEmailFrom.Text = _settings.EmailFrom;
         guiEmailTo.Text = _settings.EmailTo;
+        guiEmailBcc.Text = _settings.EmailBcc;
         numTimeout.Value = Math.Clamp(_settings.ConnectionTimeoutSeconds, 5, 300);
         chkEnableLogging.Checked = _settings.EnableLogging;
 
@@ -80,6 +81,7 @@ public partial class MainForm : Form
         _settings.TlsVersionIndex = cmbSSLVersion.SelectedIndex;
         _settings.EmailFrom = guiEmailFrom.Text.Trim();
         _settings.EmailTo = guiEmailTo.Text.Trim();
+        _settings.EmailBcc = guiEmailBcc.Text.Trim();
         _settings.ConnectionTimeoutSeconds = (int)numTimeout.Value;
         _settings.EnableLogging = chkEnableLogging.Checked;
 
@@ -283,22 +285,49 @@ public partial class MainForm : Form
             return false;
         }
 
-        if (string.IsNullOrWhiteSpace(guiEmailTo.Text))
+        var toAddresses = SplitEmailAddresses(guiEmailTo.Text);
+        var toHasAddresses = toAddresses.Count > 0;
+        var bccHasAddresses = !string.IsNullOrWhiteSpace(guiEmailBcc.Text) && SplitEmailAddresses(guiEmailBcc.Text).Count > 0;
+
+        if (!toHasAddresses && !bccHasAddresses)
         {
-            ShowValidationError("Please enter a recipient email address.", guiEmailTo);
+            ShowValidationError("Please enter at least one recipient email address (To or BCC).", guiEmailTo);
             return false;
         }
 
-        if (!IsValidEmail(guiEmailTo.Text.Trim()))
+        foreach (var address in toAddresses)
         {
-            ShowValidationError("Please enter a valid recipient email address.", guiEmailTo);
-            return false;
+            if (!IsValidEmail(address))
+            {
+                ShowValidationError($"Please enter a valid recipient email address: {address}", guiEmailTo);
+                return false;
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(guiEmailBcc.Text))
+        {
+            foreach (var address in SplitEmailAddresses(guiEmailBcc.Text))
+            {
+                if (!IsValidEmail(address))
+                {
+                    ShowValidationError($"Please enter a valid BCC recipient email address: {address}", guiEmailBcc);
+                    return false;
+                }
+            }
         }
 
         return true;
     }
 
     private static bool IsValidEmail(string email) => EmailValidationRegex().IsMatch(email);
+
+    private static List<string> SplitEmailAddresses(string input)
+    {
+        return input
+            .Split(new[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Where(s => !string.IsNullOrWhiteSpace(s))
+            .ToList();
+    }
 
     private void ShowValidationError(string message, Control control)
     {
@@ -311,7 +340,20 @@ public partial class MainForm : Form
     {
         var message = new MimeMessage();
         message.From.Add(new MailboxAddress(string.Empty, guiEmailFrom.Text.Trim()));
-        message.To.Add(new MailboxAddress(string.Empty, guiEmailTo.Text.Trim()));
+
+        foreach (var address in SplitEmailAddresses(guiEmailTo.Text))
+        {
+            message.To.Add(new MailboxAddress(string.Empty, address));
+        }
+
+        if (!string.IsNullOrWhiteSpace(guiEmailBcc.Text))
+        {
+            foreach (var address in SplitEmailAddresses(guiEmailBcc.Text))
+            {
+                message.Bcc.Add(new MailboxAddress(string.Empty, address));
+            }
+        }
+
         message.Subject = guiEmailSubject.Text;
         message.Body = new TextPart("plain")
         {

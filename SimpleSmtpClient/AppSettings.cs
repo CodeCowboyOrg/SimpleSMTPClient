@@ -25,6 +25,7 @@ public class AppSettings
     // Email Settings
     public string EmailFrom { get; set; } = string.Empty;
     public string EmailTo { get; set; } = string.Empty;
+    public string EmailBcc { get; set; } = string.Empty;
 
     // Connection Settings
     public int ConnectionTimeoutSeconds { get; set; } = 30;

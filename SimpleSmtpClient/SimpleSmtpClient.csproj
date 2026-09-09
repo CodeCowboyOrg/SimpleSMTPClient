@@ -14,10 +14,11 @@
     <Copyright>Copyright © 2025</Copyright>
     <Product>Simple SMTP Client</Product>
     <Description>Simple SMTP Windows Client for Testing SMTP Server</Description>
+    <ApplicationIcon>SimpleSMTPClient.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MailKit" Version="4.9.0" />
+    <PackageReference Include="MailKit" Version="4.17.0" />
   </ItemGroup>
 
   <ItemGroup>
