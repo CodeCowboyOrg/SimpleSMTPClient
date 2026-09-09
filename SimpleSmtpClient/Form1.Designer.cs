@@ -49,6 +49,8 @@ partial class MainForm
         this.lblSubject = new System.Windows.Forms.Label();
         this.guiEmailTo = new System.Windows.Forms.TextBox();
         this.lblEmailTo = new System.Windows.Forms.Label();
+        this.guiEmailBcc = new System.Windows.Forms.TextBox();
+        this.lblEmailBcc = new System.Windows.Forms.Label();
         this.guiEmailFrom = new System.Windows.Forms.TextBox();
         this.lblEmailFrom = new System.Windows.Forms.Label();
         this.guiSendMail = new System.Windows.Forms.Button();
@@ -209,28 +211,30 @@ partial class MainForm
         this.emailGroup.Controls.Add(this.lblSubject);
         this.emailGroup.Controls.Add(this.guiEmailTo);
         this.emailGroup.Controls.Add(this.lblEmailTo);
+        this.emailGroup.Controls.Add(this.guiEmailBcc);
+        this.emailGroup.Controls.Add(this.lblEmailBcc);
         this.emailGroup.Controls.Add(this.guiEmailFrom);
         this.emailGroup.Controls.Add(this.lblEmailFrom);
         this.emailGroup.Location = new System.Drawing.Point(12, 151);
         this.emailGroup.Name = "emailGroup";
-        this.emailGroup.Size = new System.Drawing.Size(540, 220);
+        this.emailGroup.Size = new System.Drawing.Size(540, 257);
         this.emailGroup.TabIndex = 1;
         this.emailGroup.TabStop = false;
         this.emailGroup.Text = "Email Message";
         // 
         // guiEmailBody
         // 
-        this.guiEmailBody.Location = new System.Drawing.Point(76, 120);
+        this.guiEmailBody.Location = new System.Drawing.Point(76, 153);
         this.guiEmailBody.Multiline = true;
         this.guiEmailBody.Name = "guiEmailBody";
         this.guiEmailBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
         this.guiEmailBody.Size = new System.Drawing.Size(446, 85);
-        this.guiEmailBody.TabIndex = 11;
+        this.guiEmailBody.TabIndex = 13;
         // 
         // lblBody
         // 
         this.lblBody.AutoSize = true;
-        this.lblBody.Location = new System.Drawing.Point(22, 123);
+        this.lblBody.Location = new System.Drawing.Point(22, 156);
         this.lblBody.Name = "lblBody";
         this.lblBody.Size = new System.Drawing.Size(34, 15);
         this.lblBody.TabIndex = 7;
@@ -238,15 +242,15 @@ partial class MainForm
         // 
         // guiEmailSubject
         // 
-        this.guiEmailSubject.Location = new System.Drawing.Point(76, 88);
+        this.guiEmailSubject.Location = new System.Drawing.Point(76, 121);
         this.guiEmailSubject.Name = "guiEmailSubject";
         this.guiEmailSubject.Size = new System.Drawing.Size(446, 23);
-        this.guiEmailSubject.TabIndex = 10;
+        this.guiEmailSubject.TabIndex = 12;
         // 
         // lblSubject
         // 
         this.lblSubject.AutoSize = true;
-        this.lblSubject.Location = new System.Drawing.Point(22, 91);
+        this.lblSubject.Location = new System.Drawing.Point(22, 124);
         this.lblSubject.Name = "lblSubject";
         this.lblSubject.Size = new System.Drawing.Size(46, 15);
         this.lblSubject.TabIndex = 5;
@@ -268,6 +272,22 @@ partial class MainForm
         this.lblEmailTo.TabIndex = 3;
         this.lblEmailTo.Text = "To";
         // 
+        // lblEmailBcc
+        // 
+        this.lblEmailBcc.AutoSize = true;
+        this.lblEmailBcc.Location = new System.Drawing.Point(22, 91);
+        this.lblEmailBcc.Name = "lblEmailBcc";
+        this.lblEmailBcc.Size = new System.Drawing.Size(27, 15);
+        this.lblEmailBcc.TabIndex = 10;
+        this.lblEmailBcc.Text = "Bcc";
+        // 
+        // guiEmailBcc
+        // 
+        this.guiEmailBcc.Location = new System.Drawing.Point(76, 88);
+        this.guiEmailBcc.Name = "guiEmailBcc";
+        this.guiEmailBcc.Size = new System.Drawing.Size(446, 23);
+        this.guiEmailBcc.TabIndex = 11;
+        // 
         // guiEmailFrom
         // 
         this.guiEmailFrom.Location = new System.Drawing.Point(76, 22);
@@ -286,20 +306,20 @@ partial class MainForm
         // 
         // guiSendMail
         // 
-        this.guiSendMail.Location = new System.Drawing.Point(448, 454);
+        this.guiSendMail.Location = new System.Drawing.Point(448, 491);
         this.guiSendMail.Name = "guiSendMail";
         this.guiSendMail.Size = new System.Drawing.Size(104, 31);
-        this.guiSendMail.TabIndex = 12;
+        this.guiSendMail.TabIndex = 14;
         this.guiSendMail.Text = "Send Mail";
         this.guiSendMail.UseVisualStyleBackColor = true;
         this.guiSendMail.Click += new System.EventHandler(this.guiSendMail_Click);
         // 
         // btnCancel
         // 
-        this.btnCancel.Location = new System.Drawing.Point(338, 454);
+        this.btnCancel.Location = new System.Drawing.Point(338, 491);
         this.btnCancel.Name = "btnCancel";
         this.btnCancel.Size = new System.Drawing.Size(104, 31);
-        this.btnCancel.TabIndex = 13;
+        this.btnCancel.TabIndex = 15;
         this.btnCancel.Text = "Cancel";
         this.btnCancel.UseVisualStyleBackColor = true;
         this.btnCancel.Visible = false;
@@ -313,7 +333,7 @@ partial class MainForm
         this.optionsGroup.Controls.Add(this.chkEnableLogging);
         this.optionsGroup.Controls.Add(this.lblTimeout);
         this.optionsGroup.Controls.Add(this.numTimeout);
-        this.optionsGroup.Location = new System.Drawing.Point(12, 377);
+        this.optionsGroup.Location = new System.Drawing.Point(12, 414);
         this.optionsGroup.Name = "optionsGroup";
         this.optionsGroup.Size = new System.Drawing.Size(540, 66);
         this.optionsGroup.TabIndex = 2;
@@ -397,7 +417,7 @@ partial class MainForm
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(564, 496);
+        this.ClientSize = new System.Drawing.Size(564, 533);
         this.Controls.Add(this.optionsGroup);
         this.Controls.Add(this.btnCancel);
         this.Controls.Add(this.guiSendMail);
@@ -439,6 +459,8 @@ partial class MainForm
     private System.Windows.Forms.Label lblSubject;
     private System.Windows.Forms.TextBox guiEmailTo;
     private System.Windows.Forms.Label lblEmailTo;
+    private System.Windows.Forms.TextBox guiEmailBcc;
+    private System.Windows.Forms.Label lblEmailBcc;
     private System.Windows.Forms.TextBox guiEmailFrom;
     private System.Windows.Forms.Label lblEmailFrom;
     private System.Windows.Forms.Button guiSendMail;
