@@ -286,10 +286,12 @@ public partial class MainForm : Form
         }
 
         var toAddresses = SplitEmailAddresses(guiEmailTo.Text);
+        var toHasAddresses = toAddresses.Count > 0;
+        var bccHasAddresses = !string.IsNullOrWhiteSpace(guiEmailBcc.Text) && SplitEmailAddresses(guiEmailBcc.Text).Count > 0;
 
-        if (toAddresses.Count == 0)
+        if (!toHasAddresses && !bccHasAddresses)
         {
-            ShowValidationError("Please enter a recipient email address.", guiEmailTo);
+            ShowValidationError("Please enter at least one recipient email address (To or BCC).", guiEmailTo);
             return false;
         }
 
